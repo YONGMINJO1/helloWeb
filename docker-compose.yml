@@ -17,7 +17,7 @@ services:
   was2:
     image: yongmin1/hello-web:latest
     networks:
-    - kosa_network
+      - kosa_network
 
   # nginx 생성
   nginx: 
