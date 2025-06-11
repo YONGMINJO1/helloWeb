@@ -10,12 +10,12 @@ networks:
 services:
   # was1 생성
   was1:
-    image: yongmin1/hello-web:lateest
+    image: yongmin1/hello-web:latest
 	networks:
 	  - kosa_network
   # was2 생성
   was2:
-    image: yongmin1/hello-web:lateest
+    image: yongmin1/hello-web:latest
     networks:
     - kosa_network
 
