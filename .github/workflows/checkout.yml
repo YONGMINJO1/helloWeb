@@ -24,7 +24,7 @@ jobs:
 
       - name: test gradlew 
         run: ./gradlew --info test
-		 
+
       - name: build gradlew 
         run: ./gradlew bootJar
        
