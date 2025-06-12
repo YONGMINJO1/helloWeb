@@ -16,3 +16,19 @@ public class HomeController {
         return "변경 Hello World... " + request.getServerPort();
     }
 }
+
+/*
+ * 1. 개발자가 pc에서 진행하는 절처
+ * 		1.  git commit
+ *		2.  git push
+ * 2.개발서버에서 진행하는 절차 ( 빌드 서버 )
+ * 		1. docker build -t yongmin1/hello-web:latest .
+ * 		2. docker push yongmin1/hello-web:latest
+ * 		3.
+ * 3. 운영서버에서 진행하는 절차
+ * 		1. docker-compose down
+ * 		2. dokker-compose pull
+ * 		3. docker-compose up -d
+ * 
+ * 
+ */
