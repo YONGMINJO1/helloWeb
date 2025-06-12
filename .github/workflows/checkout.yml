@@ -19,7 +19,7 @@ jobs:
         run: ./gradlew bootJar
       
       - name: docker image build
-        uses: docker build -t yongmin1/hello-web:latest .
+        uses: docker build -t ${{ secrets.USERNAME }}/hello-web:latest .
       
       - name: docker hub login
         uses: docker/login-action@vl
@@ -28,6 +28,6 @@ jobs:
           password: ${{ secrets.PASSWORD }}
       
       - name: docker hub push
-        run: docker push yongmin1/hello-web:latest
+        run: docker push ${{ secrets.USERNAME }}/hello-web:latest
       
       
