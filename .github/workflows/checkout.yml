@@ -21,7 +21,10 @@ jobs:
       
       - name: gradlew 실행권한 설정 
         run: chmod +x gradlew
-        
+
+      - name: test gradlew 
+        run: ./gradlew --info test
+		 
       - name: build gradlew 
         run: ./gradlew bootJar
        
