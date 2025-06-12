@@ -2,9 +2,12 @@ name: Our Workflow
 on: 
   push:
     branches: [ main ]
+#환경설정변수
+env:
+  REPOSITORY_NAME: hello-web:latest
     
 jobs:
-  checkout:
+  build:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -19,7 +22,7 @@ jobs:
         run: ./gradlew bootJar
       
       - name: docker image build
-        uses: docker build -t ${{ secrets.USERNAME }}/hello-web:latest .
+        uses: docker build -t ${{ secrets.USERNAME }}/${{ env.REPOITORY_NAME }} .
       
       - name: docker hub login
         uses: docker/login-action@vl
@@ -28,6 +31,24 @@ jobs:
           password: ${{ secrets.PASSWORD }}
       
       - name: docker hub push
-        run: docker push ${{ secrets.USERNAME }}/hello-web:latest
-      
-      
+        run: docker push ${{ secrets.USERNAME }}/${{ env.REPOITORY_NAME }}
+
+  deploy:
+    need: build
+	name: 서버에 배포 단계
+	runs-on: [ self-host, label-go2 ]
+	steps:
+	- name: 운영서버에서 docker hub에 로그인
+	  uses: docker/login-action@vl
+	  with:
+	    username: ${{ secrets.USERNAME }}
+	    password: ${{ secrets.PASSWORD }}
+	
+	- name: docker-compose에서 이미지 다운로드 및 실행
+	  run: |
+	    cd ~/helloWeb
+		docker-compose down
+		docker-compose pull
+		docker-compose up -d 
+		
+		
